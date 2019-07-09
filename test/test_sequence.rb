@@ -21,8 +21,9 @@ class Tests < Minitest::Test
   end
 
   def test_empty_sequence
-    empty_sequence = Sequence.new([])
-    assert_equal(empty_sequence.next.to_s, '1')
+    assert_raises(ArgumentError) do
+      Sequence.new([])
+    end
   end
 
 
