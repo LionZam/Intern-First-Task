@@ -1,9 +1,9 @@
 require 'minitest/autorun'
 require_relative '../lib/sequence'
-class Tests < Minitest::Test
 
+class Tests < Minitest::Test
   def setup
-    @sequence = Sequence.new([1, 1]).next
+    @sequence = Sequence.new("11").next
   end
 
   def test_next_sequence
@@ -25,6 +25,4 @@ class Tests < Minitest::Test
       Sequence.new([])
     end
   end
-
-
 end

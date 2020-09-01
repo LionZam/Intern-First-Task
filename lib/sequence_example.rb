@@ -1,12 +1,9 @@
 require_relative 'sequence'
+
 class SequenceExample
-  sequence = Sequence.new([1, 1])
+  sequence = Sequence.new("11")
+
   5.times do
-    puts sequence
-    sequence = sequence.next
-  end
-  6.times do
-    puts sequence
-    sequence = sequence.prev
+    puts sequence = sequence.next
   end
 end

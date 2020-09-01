@@ -1,46 +1,29 @@
 require 'byebug'
+
 class Sequence
+  attr_accessor :sequence
 
-  def initialize(array = [1])
-    raise ArgumentError if array.length.zero?
-
-    @sequence = array
+  def initialize(sequence = "")
+    @sequence = sequence
   end
 
-  # @return [Sequence]
   def next
-    new_sequence = []
-    index = 0
-    while index < @sequence.length
-      number = @sequence[index]
-      counter = 0
-      while @sequence[index] == number && index < @sequence.length
-        raise ArgumentError if @sequence[index].negative?
+    sequence_dup = sequence.dup
 
-        counter += 1
-        index += 1
+    Sequence.new.tap do |new_sequence_object|
+      while !sequence_dup.empty? do
+        numbers_substr = sequence_dup.scan(/^#{sequence_dup[0]}*/).first
+        new_sequence_object.sequence += numbers_substr.size.to_s + sequence_dup[0]
+        sequence_dup.sub!(numbers_substr, "")
       end
-      new_sequence.push(counter)
-      new_sequence.push(number)
     end
-    Sequence.new(new_sequence)
   end
 
-  # @return [Sequence]
-  def prev
-    new_sequence = []
-    index = 0
-    while index < @sequence.size
-      @sequence[index].times do
-        new_sequence.push @sequence[index + 1]
-      end
-      index += 2
-    end
-    Sequence.new(new_sequence)
+  def +(arg)
+    sequence + arg
   end
 
   def to_s
-    @sequence.join
+    sequence
   end
-
 end
